@@ -156,7 +156,7 @@ pt(Tvalue1, df = 19, lower.tail = FALSE)
 ```
 With such a low p-value (lower than .01) we reject the null hypothesis, and conclude that this year's goal scoring is, indeed,  significantly higher than what we have seen in the past. 
 
-## Is goal scoring different between conferences?
+# #Is goal scoring different between conferences?
 
 To answer this question I will strictly look at the Teams dataset. The two conferences are already split into subsets to make them easier to use. The test that will be performed to determine if there is a difference between conferences is the two-sample T-test, testing the difference between two means. We can proceed with this test, as there is independence between the two groups, no team is a part of both conferences, and within each group, all teams are unique. Also, as was stated before, there does not appear to be any outliers in the data. The hypotheses to be tested are:
 $$ Ho: \mu_w - \mu_e = 0 $$
