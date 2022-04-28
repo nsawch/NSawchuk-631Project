@@ -36,13 +36,15 @@ The datasets were then created:
 
 ```{r echo=TRUE}
 Teams
+head(Teams)
 ```
 
 ```{r echo=TRUE}
 Seasons
+head(Seasons)
 ```
 
-You can see the different columns within each dataset that I collected. In the seasons there are the Season, the GF average (Goals for average) for that season, and the number of total games played in the season. It is worth noting that when we are discussing goals for, the data is looking at one team in the game, so if we looked at on a game-per-game basis we would have to double it. Within the Teams dataset are the Team names, their goals for per game ("GP (4/7/22)") as of April 7th of 2022, the number of games each team has played, and their designated conference (west or east). 
+You can see the different columns within each dataset that I collected. In the seasons there are the Season, the GF average (Goals for average) for that season per team, and the number of total games played in the season. It is worth noting that when we are discussing goals for, the data is looking at one team in the game, so if we looked at on a game-per-game basis we would have to double it. Within the Teams dataset are the Team names, their goals for per game ("GP (4/7/22)") as of April 7th of 2022, the number of games each team has played, and their designated conference (west or east). 
 A summary of the data collected:
 
 ```{r echo=TRUE}
@@ -54,17 +56,17 @@ summary(Teams)
 For the categorical variables the summary simply shows the length and that they are characters. For the numerical variables, a variety of basic statistics are shown, however the most important one the Mean of each as that what we will be using when running our tests. 
 A look at the distributions:
 ```{r echo=TRUE, fig.height=3, fig.width=4}
-plot(Teams$'GF/GP')
+plot(Teams$'GF/GP', main = "Goals for per game average", xlab = "Team Index", ylab = "Goals for per game")
 ```
 ```{r echo=TRUE, fig.height=4, fig.width=4}
-hist(Teams$`GF/GP`, breaks = 15)
+hist(Teams$`GF/GP`, main = "Histogram of Teams Avergae Goals Scored Per Game", xlab = "Goals for per game average", breaks = 15)
 ```
 ```{r echo=TRUE, fig.height=4, fig.width=5}
-plot(Seasons$`Gf avg.`)
+plot(Seasons$`Gf avg.`, main = "Goals Scored Average Over the past Seasons", xlab = "Season Index", ylab = "Goals Scored Average")
 ```
 
 ```{r echo=TRUE, fig.height=4, fig.width=4}
-hist(Seasons$`Gf avg.`, breaks = 10)
+hist(Seasons$`Gf avg.`, main = "Goals Scored Average Per Season", xlab = "Goals Scored Average", breaks = 10)
 ```
 
 The first chart is a scatter plot of the goals for average between each team. The teams are indexed, going from lowest average to highest average. The highest average, from the summary statistics, is 4.160, which is important to note as slightly above the typical range, but not significant enough to exclude from the data. The second is a histogram with the distribution of the frequency of the average goals scored per team. I would say this distribution could constitute as relatively normal, however a slight skew to the right. The third chart is a scatter plot of the goals for averages throughout the years, the indexes are going from the year 2020-2021 down. There looks to have been some variation throughout the years, and, reading from right to left as that would be starting in 2000-2001, it is dipping until around the 03-04 lockout, and out of the lockout the scoring was up until it slowly started decreasing again, before going back up for a time. The final chart is a histogram showing the distribution of the frequency of the goals for average. This distribution is unimodal and relatively normal with no outliers.
@@ -79,7 +81,7 @@ GPTeam <- Teams$`GP (4/7/22)`
 GFavgperteam <- Teams$`GF/GP`
 ```
 
-So now, each column is separated (we wil get to conference in a bit).
+So now, each column is separated (we will get to conference in a bit).
 ```{r echo=TRUE}
 Team
 ```
@@ -126,6 +128,7 @@ While the goal scoring averages seem to be relatively normal, a sample size of 2
 In order to properly test, we will form hypotheses. 
 $$ Ho: $$ The average goals scored per game in 21-22 is the same as in the past 20 years.
 $$ Ha: $$ The average goals scored per game in 21-22 is greater than the past 20 years.
+
 Now I will conduct a one-sided (only want to know if this years scoring is higher) T-test with the degrees of freedom being 
 ```{r echo=TRUE}
 20-1
